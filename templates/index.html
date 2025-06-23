@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Downloader</title>
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container my-5">
+        <!-- Header -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="text-center mb-5">
+                    <i class="fab fa-youtube text-danger fs-1 mb-3"></i>
+                    <h1 class="display-4 fw-bold">YouTube Downloader</h1>
+                    <p class="lead text-muted">Download YouTube videos in various qualities or convert to MP3</p>
+                </div>
+            </div>
+        </div>
+        <!-- URL Input Form -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <form id="urlForm">
+                            <div class="mb-3">
+                                <label for="videoUrl" class="form-label fw-semibold">
+                                    <i class="fas fa-link me-2"></i>YouTube URL
+                                </label>
+                                <div class="input-group input-group-lg">
+                                    <input type="url" class="form-control" id="videoUrl" 
+                                           placeholder="https://www.youtube.com/watch?v=..." required>
+                                    <button class="btn btn-primary" type="submit" id="fetchBtn">
+                                        <i class="fas fa-search me-2"></i>Get Video Info
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Loading Spinner -->
+        <div class="row justify-content-center mt-4" id="loadingSpinner" style="display: none;">
+            <div class="col-auto">
+                <div class="d-flex align-items-center">
+                    <div class="spinner-border text-primary me-3" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <span class="text-muted">Fetching video information...</span>
+                </div>
+            </div>
+        </div>
+        <!-- Error Alert -->
+        <div class="row justify-content-center mt-4" id="errorAlert" style="display: none;">
+            <div class="col-lg-8">
+                <div class="alert alert-danger" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <span id="errorMessage"></span>
+                </div>
+            </div>
+        </div>
+        <!-- Video Information -->
+        <div class="row justify-content-center mt-4" id="videoInfo" style="display: none;">
+            <div class="col-lg-8">
+                <div class="card shadow-lg">
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <div class="thumbnail-container">
+                                    <img id="videoThumbnail" src="" alt="Video Thumbnail" class="img-fluid rounded thumbnail-img">
+                                    <div class="thumbnail-overlay">
+                                        <i class="fas fa-play-circle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <h4 id="videoTitle" class="card-title mb-3 gradient-text"></h4>
+                                <p class="text-muted mb-4">
+                                    <i class="fas fa-clock me-2"></i>
+                                    Duration: <span id="videoDuration"></span>
+                                </p>
+                                <!-- Quality Selection -->
+                                <div class="mb-4">
+                                    <label for="qualitySelect" class="form-label fw-semibold">
+                                        <i class="fas fa-cog me-2"></i>Select Quality
+                                    </label>
+                                    <select class="form-select" id="qualitySelect">
+                                        <option value="">Choose quality...</option>
+                                    </select>
+                                </div>
+                                <!-- Audio Format Selection -->
+                                <div class="mb-4" id="audioFormatSection">
+                                    <label for="audioFormat" class="form-label fw-semibold">
+                                        <i class="fas fa-file-audio me-2"></i>Audio Format
+                                    </label>
+                                    <select class="form-select" id="audioFormat">
+                                        <option value="mp3">MP3 (Compressed)</option>
+                                        <option value="wav">WAV (Uncompressed)</option>
+                                        <option value="flac">FLAC (Lossless)</option>
+                                    </select>
+                                </div>
+                                <!-- Download Buttons -->
+                                <div class="d-grid gap-2 d-md-flex">
+                                    <button class="btn btn-success btn-lg glow-btn" id="downloadVideoBtn" disabled>
+                                        <i class="fas fa-download me-2"></i>Download Video
+                                    </button>
+                                    <button class="btn btn-info btn-lg glow-btn" id="downloadAudioBtn">
+                                        <i class="fas fa-music me-2"></i>Download Audio
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Playlist Information -->
+        <div class="row justify-content-center mt-4" id="playlistInfo" style="display: none;">
+            <div class="col-lg-10">
+                <div class="card shadow-lg">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h4 id="playlistTitle" class="card-title gradient-text mb-0"></h4>
+                            <span class="badge bg-primary" id="playlistCount"></span>
+                        </div>
+                        
+                        <!-- Playlist Videos Grid -->
+                        <div class="row" id="playlistVideos"></div>
+                        
+                        <!-- Playlist Download Options -->
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <label for="playlistDownloadType" class="form-label fw-semibold">
+                                    <i class="fas fa-download me-2"></i>Download Type
+                                </label>
+                                <select class="form-select" id="playlistDownloadType">
+                                    <option value="video">Videos (MP4)</option>
+                                    <option value="audio">Audio Only</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6" id="playlistAudioFormatSection">
+                                <label for="playlistAudioFormat" class="form-label fw-semibold">
+                                    <i class="fas fa-file-audio me-2"></i>Audio Format
+                                </label>
+                                <select class="form-select" id="playlistAudioFormat">
+                                    <option value="mp3">MP3 (Compressed)</option>
+                                    <option value="wav">WAV (Uncompressed)</option>
+                                    <option value="flac">FLAC (Lossless)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <button class="btn btn-warning btn-lg glow-btn" id="downloadPlaylistBtn">
+                                <i class="fas fa-download me-2"></i>Download Entire Playlist
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Batch Download Progress -->
+        <div class="row justify-content-center mt-4" id="batchProgress" style="display: none;">
+            <div class="col-lg-8">
+                <div class="card shadow-lg">
+                    <div class="card-body p-4">
+                        <h5 class="mb-3">
+                            <i class="fas fa-tasks me-2"></i>Batch Download Progress
+                        </h5>
+                        <div class="progress mb-3" style="height: 25px;">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                 id="batchProgressBar" role="progressbar" style="width: 0%">
+                                <span id="batchProgressText">0%</span>
+                            </div>
+                        </div>
+                        <p class="text-muted mb-2">
+                            <strong>Status:</strong> <span id="batchStatus">Starting...</span>
+                        </p>
+                        <p class="text-muted mb-2">
+                            <strong>Current:</strong> <span id="batchCurrent">-</span>
+                        </p>
+                        <p class="text-muted mb-0">
+                            <strong>Progress:</strong> <span id="batchProgressCount">0 / 0</span>
+                        </p>
+                        <div class="text-center mt-3" id="batchDownloadReady" style="display: none;">
+                            <button class="btn btn-success btn-lg glow-btn" id="downloadBatchBtn">
+                                <i class="fas fa-file-archive me-2"></i>Download ZIP File
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Download Progress -->
+        <div class="row justify-content-center mt-4" id="downloadProgress" style="display: none;">
+            <div class="col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center">
+                            <div class="spinner-border text-success me-3" role="status">
+                                <span class="visually-hidden">Downloading...</span>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Downloading...</h6>
+                                <p class="text-muted mb-0" id="downloadStatus">Please wait while we process your request</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-8">
+                <div class="text-center text-muted">
+                    <small>
+                        <i class="fas fa-info-circle me-2"></i>
+                        This tool supports downloading public YouTube videos. Premium content and private videos are not supported.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
