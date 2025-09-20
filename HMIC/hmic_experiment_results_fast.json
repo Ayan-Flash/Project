@@ -1,0 +1,353 @@
+{
+  "graph_info": {
+    "nodes": 300,
+    "edges": 592,
+    "communities": 100
+  },
+  "community_info": {
+    "selected_community": 55,
+    "community_size": 29,
+    "mastermind_node": 1126
+  },
+  "initial_centrality": {
+    "degree": 0.07023411371237458,
+    "closeness": 0.0789024639956317,
+    "betweenness": 0.018442362805456834
+  },
+  "hmic_results": {
+    "initial_centrality": {
+      "degree": 0.07023411371237458,
+      "closeness": 0.0789024639956317,
+      "betweenness": 0.020873955928486128
+    },
+    "final_centrality": {
+      "degree": 0.07023411371237458,
+      "closeness": 0.0789024639956317,
+      "betweenness": 0.01934094727047747
+    },
+    "total_modifications": 0,
+    "iterations_completed": 0,
+    "iteration_results": [],
+    "centrality_change": {
+      "degree": 0.0,
+      "closeness": 0.0,
+      "betweenness": -0.0015330086580086569
+    }
+  },
+  "sir_before": {
+    "epidemic_history": [
+      {
+        "step": 0,
+        "susceptible": 299,
+        "infected": 1,
+        "recovered": 0,
+        "total": 300
+      },
+      {
+        "step": 1,
+        "susceptible": 292,
+        "infected": 6,
+        "recovered": 2,
+        "total": 300
+      },
+      {
+        "step": 2,
+        "susceptible": 279,
+        "infected": 17,
+        "recovered": 4,
+        "total": 300
+      },
+      {
+        "step": 3,
+        "susceptible": 266,
+        "infected": 27,
+        "recovered": 7,
+        "total": 300
+      },
+      {
+        "step": 4,
+        "susceptible": 258,
+        "infected": 32,
+        "recovered": 10,
+        "total": 300
+      },
+      {
+        "step": 5,
+        "susceptible": 253,
+        "infected": 35,
+        "recovered": 12,
+        "total": 300
+      },
+      {
+        "step": 6,
+        "susceptible": 251,
+        "infected": 32,
+        "recovered": 17,
+        "total": 300
+      },
+      {
+        "step": 7,
+        "susceptible": 249,
+        "infected": 28,
+        "recovered": 23,
+        "total": 300
+      },
+      {
+        "step": 8,
+        "susceptible": 247,
+        "infected": 26,
+        "recovered": 27,
+        "total": 300
+      },
+      {
+        "step": 9,
+        "susceptible": 247,
+        "infected": 25,
+        "recovered": 28,
+        "total": 300
+      },
+      {
+        "step": 10,
+        "susceptible": 247,
+        "infected": 23,
+        "recovered": 30,
+        "total": 300
+      },
+      {
+        "step": 11,
+        "susceptible": 245,
+        "infected": 22,
+        "recovered": 33,
+        "total": 300
+      },
+      {
+        "step": 12,
+        "susceptible": 244,
+        "infected": 20,
+        "recovered": 36,
+        "total": 300
+      },
+      {
+        "step": 13,
+        "susceptible": 242,
+        "infected": 21,
+        "recovered": 37,
+        "total": 300
+      },
+      {
+        "step": 14,
+        "susceptible": 240,
+        "infected": 22,
+        "recovered": 38,
+        "total": 300
+      },
+      {
+        "step": 15,
+        "susceptible": 239,
+        "infected": 22,
+        "recovered": 39,
+        "total": 300
+      },
+      {
+        "step": 16,
+        "susceptible": 238,
+        "infected": 21,
+        "recovered": 41,
+        "total": 300
+      },
+      {
+        "step": 17,
+        "susceptible": 237,
+        "infected": 18,
+        "recovered": 45,
+        "total": 300
+      },
+      {
+        "step": 18,
+        "susceptible": 234,
+        "infected": 18,
+        "recovered": 48,
+        "total": 300
+      },
+      {
+        "step": 19,
+        "susceptible": 233,
+        "infected": 19,
+        "recovered": 48,
+        "total": 300
+      }
+    ],
+    "final_states": {
+      "susceptible": 233,
+      "infected": 16,
+      "recovered": 51
+    },
+    "spreading_capability": 0.22333333333333333,
+    "total_steps": 20,
+    "initial_infected": [
+      1126
+    ]
+  },
+  "sir_after": {
+    "epidemic_history": [
+      {
+        "step": 0,
+        "susceptible": 299,
+        "infected": 1,
+        "recovered": 0,
+        "total": 300
+      },
+      {
+        "step": 1,
+        "susceptible": 295,
+        "infected": 5,
+        "recovered": 0,
+        "total": 300
+      },
+      {
+        "step": 2,
+        "susceptible": 283,
+        "infected": 16,
+        "recovered": 1,
+        "total": 300
+      },
+      {
+        "step": 3,
+        "susceptible": 273,
+        "infected": 23,
+        "recovered": 4,
+        "total": 300
+      },
+      {
+        "step": 4,
+        "susceptible": 266,
+        "infected": 29,
+        "recovered": 5,
+        "total": 300
+      },
+      {
+        "step": 5,
+        "susceptible": 258,
+        "infected": 33,
+        "recovered": 9,
+        "total": 300
+      },
+      {
+        "step": 6,
+        "susceptible": 257,
+        "infected": 31,
+        "recovered": 12,
+        "total": 300
+      },
+      {
+        "step": 7,
+        "susceptible": 254,
+        "infected": 28,
+        "recovered": 18,
+        "total": 300
+      },
+      {
+        "step": 8,
+        "susceptible": 252,
+        "infected": 27,
+        "recovered": 21,
+        "total": 300
+      },
+      {
+        "step": 9,
+        "susceptible": 251,
+        "infected": 26,
+        "recovered": 23,
+        "total": 300
+      },
+      {
+        "step": 10,
+        "susceptible": 251,
+        "infected": 24,
+        "recovered": 25,
+        "total": 300
+      },
+      {
+        "step": 11,
+        "susceptible": 250,
+        "infected": 20,
+        "recovered": 30,
+        "total": 300
+      },
+      {
+        "step": 12,
+        "susceptible": 249,
+        "infected": 19,
+        "recovered": 32,
+        "total": 300
+      },
+      {
+        "step": 13,
+        "susceptible": 248,
+        "infected": 17,
+        "recovered": 35,
+        "total": 300
+      },
+      {
+        "step": 14,
+        "susceptible": 248,
+        "infected": 14,
+        "recovered": 38,
+        "total": 300
+      },
+      {
+        "step": 15,
+        "susceptible": 248,
+        "infected": 14,
+        "recovered": 38,
+        "total": 300
+      },
+      {
+        "step": 16,
+        "susceptible": 248,
+        "infected": 13,
+        "recovered": 39,
+        "total": 300
+      },
+      {
+        "step": 17,
+        "susceptible": 247,
+        "infected": 13,
+        "recovered": 40,
+        "total": 300
+      },
+      {
+        "step": 18,
+        "susceptible": 246,
+        "infected": 14,
+        "recovered": 40,
+        "total": 300
+      },
+      {
+        "step": 19,
+        "susceptible": 244,
+        "infected": 16,
+        "recovered": 40,
+        "total": 300
+      }
+    ],
+    "final_states": {
+      "susceptible": 243,
+      "infected": 16,
+      "recovered": 41
+    },
+    "spreading_capability": 0.19,
+    "total_steps": 20,
+    "initial_infected": [
+      1126
+    ]
+  },
+  "effectiveness": {
+    "centrality_reduction": {
+      "degree": 0.0,
+      "closeness": 0.0,
+      "betweenness": -0.0015330086580086569
+    },
+    "spreading_capability_reduction": 0.033333333333333326
+  }
+}
